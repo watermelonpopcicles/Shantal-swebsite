@@ -6,14 +6,6 @@ app = flask.Flask(__name__)
 
 @app.route("/")
 def home_view():
-    return "<p>hello</p>"
+    return "<p>hi everyone, I am making a website</p>"
 
 
-@app.route("/abc")
-def abc():
-    return jsonify(
-                message="good test",
-                category="success",
-                data=data,
-                status=200
-            )
