@@ -28,7 +28,6 @@ def getweather ():
     info10=json.loads(info6)
     forst = {}
     for day in info10["daily"]:
-        forst["day"] = datetime.fromtimestamp(day["dt"])
-        forst["temp"] = day["temp"]["day"]
+        forst[datetime.fromtimestamp(day["dt"])] = day["temp"]["day"]
     return degrees, forst
 

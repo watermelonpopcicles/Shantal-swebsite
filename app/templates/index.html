@@ -46,9 +46,12 @@
     <link href="../static/css/carousel.css" rel="stylesheet">
   </head>
   <body>
-	Today's weather is {{weather}} ° F
-	print("This is the forcast" + forcast")
-
+	This week's weather is:
+	<br>
+	{%for day in forcast %}
+	{{day}}: {{forcast[day]}}° F
+	<br>
+	{%endfor%}
 
   <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
