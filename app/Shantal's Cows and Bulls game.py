@@ -3,13 +3,13 @@ from tkinter import *
 
 letters =["A", "B", "C", "D", "E"]
 win = False
-
 key = ""
+
 for i in range (4):
     key += random.choice(letters)
-#    print(key)
+    
 letterdic = dict(zip(list(key),[0]*len(key)))
-
+print(key)
 bull = 0
 cow = 0
 
@@ -20,19 +20,28 @@ def pickChoice():
 
     if guess == key:
         win = True
+        bull = 4
+
         print ("You Win!!!")
+        l = Label(scrollable_frame, text = "You Win!", bg = "beige", font =("Didact Gothic", 75))
+        l.pack()
         
     else:
+        dummy = list(key)
         for i in range(len(guess)):
             if(guess[i] not in key):
                 continue
-            
-            if (guess[i]==key[i]):
-                bull = bull + 1
-                letterdic[key[i]] += 1
-            
-            if (letterdic[guess[i]] < guess.count(guess[i])):
+            #check them seperatly and check bulls then cows
+            else:
+                if (guess[i]==key[i]):
+                    bull = bull + 1
+                    dummy[i] = "*"
+                
+        for i in range(len(guess)):
+            if(guess[i] in dummy):
+                dummy[dummy.index(guess[i])] = "*"
                 cow = cow + 1
+                    
 
     l = Label(scrollable_frame, text = "Bull = " +str(bull) + ", " +"Cow = " + str(cow) + "  " +guess, bg = "beige", font =("Didact Gothic", 12))
     l.pack()
@@ -99,8 +108,8 @@ submitbutton.pack(pady = 15)
 #results
 container = Frame(window, borderwidth = 7, relief = "solid")
 canvas = Canvas(container, bg = "beige")
-scrollbar = Scrollbar(container, orient = "vertical", command = canvas.yview)
-scrollable_frame = Frame(canvas)
+scrollbar = Scrollbar(container, orient = "vertical", command = canvas.yview,bg="beige")
+scrollable_frame = Frame(canvas,bg="beige")
 
 scrollable_frame.bind(
     "<Configure>",
